@@ -1,0 +1,53 @@
+<div class="card-body">
+  <h5 class="card-title">{{@category.name}}
+    <div class="btn-group btn-group-sm float-right" role="group" aria-label="Cateogry Edit buttons">
+      <BsButton @type="primary" @onClick={{action "openAll"}}>Open all</BsButton>
+      <LinkTo @route="dashboard.newbookmark" @models={{array @category.dashboard.id @category.id}} class="btn btn-primary">Add</LinkTo>
+{{!--      <BsButton @type="primary" @onClick={{action (mut displayAddModal) true}}>New</BsButton>--}}
+      <BsButton @type="warning" @onClick={{action "edit"}}>Edit</BsButton>
+      <BsButton @type="danger" @onClick={{action (mut displayDeleteModal) true}}>Delete</BsButton>
+    </div>
+  </h5>
+  <h6 class="card-subtitle mb-2 text-muted">{{@category.description}}</h6>
+  <ul class="list-group list-group-flush">{{@t}}
+    {{#each @category.bookmarks as |bookmark|}}
+      <Bookmark @bookmark={{bookmark}} />
+    {{/each}}
+  </ul>
+</div>
+
+<BsModal
+        @open={{displayDeleteModal}}
+        @onSubmit={{action "delete"}}
+        @onHidden={{action (mut displayDeleteModal) false}} as |modal|>
+  <modal.header>
+    <h4 class="modal-title">
+      Warning !
+    </h4>
+  </modal.header>
+  <modal.body>
+    <p>Are you sure to delete the category {{@category.name}} ? All bookmarks will be lost ! This action cannot be undone !</p>
+  </modal.body>
+  <modal.footer>
+    <BsButton @onClick={{action modal.close}}>Cancel</BsButton>
+    <BsButton @type="danger" @onClick={{action modal.submit}}>Delete</BsButton>
+  </modal.footer>
+</BsModal>
+
+{{!--<BsModal--}}
+{{!--        @open={{newBookmark}}--}}
+{{!--        @onSubmit={{action "add"}}--}}
+{{!--        @onHidden={{action "newRecord"}} as |modal|>--}}
+{{!--  <modal.header>--}}
+{{!--    <h4 class="modal-title">--}}
+{{!--      Warning !--}}
+{{!--    </h4>--}}
+{{!--  </modal.header>--}}
+{{!--  <modal.body>--}}
+{{!--    <p>Are you sure to delete the category {{@category.name}} ? All bookmarks will be lost ! This action cannot be undone !</p>--}}
+{{!--  </modal.body>--}}
+{{!--  <modal.footer>--}}
+{{!--    <BsButton @onClick={{action modal.close}}>Cancel</BsButton>--}}
+{{!--    <BsButton @type="danger" @onClick={{action modal.submit}}>Delete</BsButton>--}}
+{{!--  </modal.footer>--}}
+{{!--</BsModal>--}}

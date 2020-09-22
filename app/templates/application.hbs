@@ -1,5 +1,26 @@
-{{!-- The following component displays Ember's default welcome message. --}}
-<WelcomePage />
-{{!-- Feel free to remove this! --}}
-
-{{outlet}}
+<BsNavbar
+        @type="dark"
+        @backgroundColor="dark"
+        @collapsed={{true}}
+        @onCollapse={{action (mut collapsed) true}}
+        @onExpand={{action (mut collapsed) false}} as |navbar|>
+  <div class="navbar-header">
+    {{navbar.toggle}}
+    {{#link-to "index" class="navbar-brand"}}Bookmarks{{/link-to}}
+  </div>
+  <navbar.content>
+    <navbar.nav as |nav|>
+      {{#each model as |dashboard|}}
+        <nav.item>
+          <nav.link-to @route="dashboard" @model="{{dashboard.id}}">{{dashboard.name}}</nav.link-to>
+        </nav.item>
+      {{/each}}
+      <nav.item>
+        <nav.link-to @route="newdashboard" class="btn btn-primary btn-sm">Add new dashboard</nav.link-to>
+      </nav.item>
+    </navbar.nav>
+  </navbar.content>
+</BsNavbar>
+<div class="container mt-2">
+  {{outlet}}
+</div>

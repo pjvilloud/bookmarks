@@ -1,0 +1,7 @@
+<ul class="list-group list-group-flush">
+  {{#each @bookmarks as |bookmark|}}
+  <li class="list-group-item">
+    <Bookmark @bookmark="{{bookmark}}"/>
+  </li>
+  {{/each}}
+</ul>

@@ -1,0 +1,17 @@
+<BsModal
+        @open={{@open}}
+        @onSubmit={{action @submitAction}}
+        @onHidden={{action @cancelAction}} as |modal|>
+  <modal.header>
+    <h4 class="modal-title">
+      {{@title}}
+    </h4>
+  </modal.header>
+  <modal.body>
+    {{yield}}
+  </modal.body>
+  <modal.footer>
+    <BsButton @onClick={{action modal.close}}>Cancel</BsButton>
+    <BsButton @type="{{@submitColor}}" @onClick={{action modal.submit}}>{{@submitTitle}}</BsButton>
+  </modal.footer>
+</BsModal>

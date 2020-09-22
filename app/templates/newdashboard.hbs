@@ -1,0 +1,19 @@
+<BsModal
+        @onSubmit={{action "addDashboard"}}
+        @onHidden={{action "transitionToIndex"}}
+        as |modal|>
+  <modal.header>
+    <h4 class="modal-title">
+      Adding a new dashboard
+    </h4>
+  </modal.header>
+  <BsForm @formLayout="vertical" @model={{this}} @onSubmit={{action "addDashboard"}} as |form|>
+    <modal.body>
+      <form.element @controlType="text" @label="Name" @placeholder="Name of the dashboard" @property="model.name" @required={{true}} />
+    </modal.body>
+    <modal.footer>
+      <form.submitButton>Save</form.submitButton>
+      <BsButton @onClick={{action modal.close}}>Cancel</BsButton>
+    </modal.footer>
+  </BsForm>
+</BsModal>

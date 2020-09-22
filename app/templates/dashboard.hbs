@@ -1,0 +1,28 @@
+<h1>{{model.name}} <LinkTo @route="dashboard.newcategory" @model={{model}} class="btn btn-primary">Add new category</LinkTo> <BsButton @type="danger" @onClick={{action (mut displayDeleteModal) true}}>Delete</BsButton>
+
+</h1>
+<div class="row row-cols-1 row-cols-md-2">
+{{#each model.categories as |category|}}
+  <div class="col mb-4">
+    <CategoryCard @category={{category}} class="card" />
+  </div>
+{{/each}}
+</div>
+{{outlet}}
+<BsModal
+        @open={{displayDeleteModal}}
+        @onSubmit={{action "delete"}}
+        @onHidden={{action (mut displayDeleteModal) false}} as |modal|>
+  <modal.header>
+    <h4 class="modal-title">
+      Warning !
+    </h4>
+  </modal.header>
+  <modal.body>
+    <p>Are you sure to delete the dashboard {{model.name}} ? All categories and bookmarks will be lost ! This action cannot be undone !</p>
+  </modal.body>
+  <modal.footer>
+    <BsButton @onClick={{action modal.close}}>Cancel</BsButton>
+    <BsButton @type="danger" @onClick={{action modal.submit}}>Delete</BsButton>
+  </modal.footer>
+</BsModal>

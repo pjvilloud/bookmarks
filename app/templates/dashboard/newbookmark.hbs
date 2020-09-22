@@ -1,0 +1,21 @@
+<BsModal
+        @onSubmit={{action "add"}}
+        @onHidden={{action "cancelAdd"}} as |modal|>
+  <modal.header>
+    <h4 class="modal-title">
+      Adding a new bookmark to dashboard {{model.dashboard.name}}, category {{model.category.name}}
+    </h4>
+  </modal.header>
+  <BsForm @formLayout="vertical" @model={{this}} @onSubmit={{action "add"}} as |form|>
+    <modal.body>
+      <form.element @controlType="text" @label="Name" @placeholder="Name of the bookmark" @property="model.bookmark.name" @required={{true}} />
+      <form.element @controlType="text" @label="Description" @placeholder="Description of the bookmark" @property="model.bookmark.description" @required={{false}} />
+      <form.element @controlType="text" @label="URL" @placeholder="URL of the bookmark" @property="model.bookmark.url" @required={{true}} />
+      <form.element @controlType="text" @label="Icon" @placeholder="URL of the icon" @property="model.bookmark.icon" @required={{false}} />
+    </modal.body>
+    <modal.footer>
+      <form.submitButton>Save</form.submitButton>
+      <BsButton @onClick={{action modal.close}}>Cancel</BsButton>
+    </modal.footer>
+  </BsForm>
+</BsModal>

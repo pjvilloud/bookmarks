@@ -1,0 +1,27 @@
+<li class="list-group-item" {{on "mouseenter" this.toggleEditButtons}} {{on "mouseleave" this.toggleEditButtons}}>
+  <a href={{@bookmark.url}} target="_blank"><img src={{if @bookmark.icon @bookmark.icon (concat @bookmark.url "favicon.ico")}} alt={{@bookmark.name}} class="site-icon">&nbsp;{{@bookmark.name}}</a>
+  {{#if this.editButtonsActive}}
+    <div class="btn-group btn-group-sm float-right" role="group" aria-label="Edit buttons">
+      <BsButton @type="primary" @onClick={{action "edit"}}>Edit</BsButton>
+      <BsButton @type="danger" @onClick={{action (mut displayDeleteModal) true}}>Delete</BsButton>
+    </div>
+  {{/if}}
+</li>
+
+<BsModal
+        @open={{displayDeleteModal}}
+        @onSubmit={{action "delete"}}
+        @onHidden={{action (mut displayDeleteModal) false}} as |modal|>
+  <modal.header>
+    <h4 class="modal-title">
+      Warning !
+    </h4>
+  </modal.header>
+  <modal.body>
+    <p>Are you sure to delete the bookmark {{@bookmark.name}} ? This actions cannot be undone !</p>
+  </modal.body>
+  <modal.footer>
+    <BsButton @onClick={{action modal.close}}>Cancel</BsButton>
+    <BsButton @type="danger" @onClick={{action modal.submit}}>Delete</BsButton>
+  </modal.footer>
+</BsModal>
