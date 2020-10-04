@@ -6,6 +6,7 @@ import { inject as service } from '@ember/service';
 export default class CategoryCardComponent extends Component {
   @tracked displayDeleteModal = false;
   @tracked displayAddModal = false;
+  @tracked editButtonsActive = false;
   @tracked newBookmark;
 
   @service store;
@@ -15,6 +16,11 @@ export default class CategoryCardComponent extends Component {
     this.args.category.hasMany("bookmarks").value().forEach(bookmark => {
       window.open(bookmark.url);
     })
+  }
+
+  @action
+  toggleEditButtons(){
+    this.editButtonsActive = !this.editButtonsActive;
   }
 
   @action

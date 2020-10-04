@@ -4,7 +4,7 @@ import {action} from "@ember/object";
 export default class DashboardNewbookmarkController extends Controller {
 
   @action
-  add(){
+  save(){
     this.model.bookmark.category = this.model.category;
     this.model.bookmark.save().then(() => {
       this.transitionToRoute("dashboard", this.model.dashboard.id);
@@ -12,7 +12,7 @@ export default class DashboardNewbookmarkController extends Controller {
   }
 
   @action
-  cancelAdd(){
+  cancelSave(){
 
   }
 }

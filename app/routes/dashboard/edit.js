@@ -1,9 +1,10 @@
 import Route from '@ember/routing/route';
 import { action } from '@ember/object';
 
-export default class NewdashboardRoute extends Route {
+export default class EditdashboardRoute extends Route {
   model(){
-    return this.store.createRecord('dashboard');
+    let {dashboard_id} = this.paramsFor('dashboard');
+    return this.store.findRecord("dashboard", dashboard_id);
   }
 
   @action

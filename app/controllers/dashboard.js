@@ -6,6 +6,13 @@ export default class DashboardController extends Controller {
 
   @tracked displayDeleteModal = false;
 
+  @tracked editButtonsActive = false;
+
+  @action
+  toggleEditButtons(){
+    this.editButtonsActive = !this.editButtonsActive;
+  }
+
   @action
   delete(){
     let categories = this.model.hasMany("categories").value();

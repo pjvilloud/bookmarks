@@ -1,8 +1,8 @@
-<li class="list-group-item" {{on "mouseenter" this.toggleEditButtons}} {{on "mouseleave" this.toggleEditButtons}}>
+<li class="list-group-item bookmark" {{on "mouseenter" this.toggleEditButtons}} {{on "mouseleave" this.toggleEditButtons}}>
   <a href={{@bookmark.url}} target="_blank"><img src={{if @bookmark.icon @bookmark.icon (concat @bookmark.url "favicon.ico")}} alt={{@bookmark.name}} class="site-icon">&nbsp;{{@bookmark.name}}</a>
   {{#if this.editButtonsActive}}
     <div class="btn-group btn-group-sm float-right" role="group" aria-label="Edit buttons">
-      <BsButton @type="primary" @onClick={{action "edit"}}>Edit</BsButton>
+      <LinkTo @route="dashboard.editbookmark" @models={{array @bookmark.category.id @bookmark.id}} class="btn btn-primary">Edit</LinkTo>
       <BsButton @type="danger" @onClick={{action (mut displayDeleteModal) true}}>Delete</BsButton>
     </div>
   {{/if}}

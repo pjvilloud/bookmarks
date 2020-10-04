@@ -12,11 +12,6 @@ export default class BookmarkComponent extends Component {
   }
 
   @action
-  edit(){
-
-  }
-
-  @action
   delete(){
     this.args.bookmark.destroyRecord();
   }

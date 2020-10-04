@@ -1,13 +1,17 @@
 <BsModal
-        @onSubmit={{action "addDashboard"}}
+        @onSubmit={{action "saveDashboard"}}
         @onHidden={{action "transitionToIndex"}}
         as |modal|>
   <modal.header>
     <h4 class="modal-title">
-      Adding a new dashboard
+      {{#if @model.isNew}}
+        Adding a new dashboard
+      {{else}}
+        Editing dashboard {{@model.name}}
+      {{/if}}
     </h4>
   </modal.header>
-  <BsForm @formLayout="vertical" @model={{this}} @onSubmit={{action "addDashboard"}} as |form|>
+  <BsForm @formLayout="vertical" @model={{this}} @onSubmit={{action "saveDashboard"}} as |form|>
     <modal.body>
       <form.element @controlType="text" @label="Name" @placeholder="Name of the dashboard" @property="model.name" @required={{true}} />
     </modal.body>

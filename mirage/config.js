@@ -33,6 +33,7 @@ export default function() {
   this.delete('/categories/:id');
   this.delete('/dashboards/:id');
 
+  this.patch('/dashboards/:id');
   this.patch('/bookmarks/:id');
   this.put('/bookmarks/:id');
 

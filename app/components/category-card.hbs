@@ -1,12 +1,19 @@
 <div class="card-body">
-  <h5 class="card-title">{{@category.name}}
-    <div class="btn-group btn-group-sm float-right" role="group" aria-label="Cateogry Edit buttons">
-      <BsButton @type="primary" @onClick={{action "openAll"}}>Open all</BsButton>
-      <LinkTo @route="dashboard.newbookmark" @models={{array @category.dashboard.id @category.id}} class="btn btn-primary">Add</LinkTo>
+  <h5 class="card-title mb-3" {{on "mouseenter" this.toggleEditButtons}} {{on "mouseleave" this.toggleEditButtons}}>{{@category.name}}
+    <div class="btn-group btn-group-sm float-right" role="group" aria-label="Bookmarks actions buttons">
+      {{#if @category.bookmarks.length}}
+        <BsButton @type="primary" @onClick={{action "openAll"}}>Open all bookmarks</BsButton>
+      {{/if}}
+      <LinkTo @route="dashboard.editbookmark" @models={{array @category.dashboard.id @category.id}} class="btn btn-primary">Add bookmark</LinkTo>
 {{!--      <BsButton @type="primary" @onClick={{action (mut displayAddModal) true}}>New</BsButton>--}}
+    </div>
+    {{#if this.editButtonsActive}}
+    <div class="btn-group btn-group-sm float-right" role="group" aria-label="Cateogry Edit buttons">
       <BsButton @type="warning" @onClick={{action "edit"}}>Edit</BsButton>
       <BsButton @type="danger" @onClick={{action (mut displayDeleteModal) true}}>Delete</BsButton>
     </div>
+    {{/if}}
+
   </h5>
   <h6 class="card-subtitle mb-2 text-muted">{{@category.description}}</h6>
   <ul class="list-group list-group-flush">{{@t}}
